@@ -44,7 +44,7 @@ class AirportTest {
             () -> assertEquals(0, economyFlight.getPassengers().size()));
       }
     }
-    
+
     @Nested
     @DisplayName("VIP 승객이 한명 있다.")
     class VipPassenger {
@@ -60,6 +60,21 @@ class AirportTest {
             () -> assertEquals(false, economyFlight.removePassenger(jung)),
             () -> assertEquals(1, economyFlight.getPassengers().size()));
       }
+    }
+  }
+
+  @DisplayName("비즈니스 항공편 1 대가 있다")
+  @Nested
+  class BusinessFlightTest {
+    private Flight businessFlight;
+    private Passenger min;
+    private Passenger jung;
+
+    @BeforeEach
+    void setUp() {
+      businessFlight = new BusinessFlight("2");
+      min = new Passenger("민영철", false);
+      jung = new Passenger("정성국", true);
     }
   }
 
