@@ -77,7 +77,7 @@ class AirportTest {
       min = new Passenger("민영철", false);
       jung = new Passenger("정성국", true);
     }
-    
+
     @Nested
     @DisplayName("보통 승객이 한명 있다.")
     class RegularPassenger {
@@ -89,6 +89,20 @@ class AirportTest {
             () -> assertEquals(0, businessFlight.getPassengers().size()),
             () -> assertEquals(false, businessFlight.removePassenger(min)),
             () -> assertEquals(0, businessFlight.getPassengers().size()));
+      }
+    }
+
+    @Nested
+    @DisplayName("VIP 승객이 한명 있다.")
+    class VipPassenger {
+      @Test
+      @DisplayName("비즈니스 항공편에 탑승되나 제거는 불가하다.")
+      public void testVipOnBusiness() {
+        assertAll("VIP 승객이 비즈니스 항공편 이용에 관한 검증",
+            () -> assertEquals(true, businessFlight.addPassenger(jung)),
+            () -> assertEquals(1, businessFlight.getPassengers().size()),
+            () -> assertEquals(false, businessFlight.removePassenger(jung)),
+            () -> assertEquals(1, businessFlight.getPassengers().size()));
       }
     }
   }
