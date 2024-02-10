@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import space.bum.junit.tdd.model.BusinessFlight;
 import space.bum.junit.tdd.model.EconomyFlight;
 import space.bum.junit.tdd.model.Flight;
 import space.bum.junit.tdd.model.Passenger;
@@ -75,6 +76,20 @@ class AirportTest {
       businessFlight = new BusinessFlight("2");
       min = new Passenger("민영철", false);
       jung = new Passenger("정성국", true);
+    }
+    
+    @Nested
+    @DisplayName("보통 승객이 한명 있다.")
+    class RegularPassenger {
+      @Test
+      @DisplayName("비즈니스 항공편에 승객을 가감할 수 없다.")
+      public void testRegularOnBusiness() {
+        assertAll("일반 승객은 비즈니 항공편 이용에 관한 검증",
+            () -> assertEquals(false, businessFlight.addPassenger(min)),
+            () -> assertEquals(0, businessFlight.getPassengers().size()),
+            () -> assertEquals(false, businessFlight.removePassenger(min)),
+            () -> assertEquals(0, businessFlight.getPassengers().size()));
+      }
     }
   }
 
