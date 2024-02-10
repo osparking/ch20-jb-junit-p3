@@ -44,6 +44,23 @@ class AirportTest {
             () -> assertEquals(0, economyFlight.getPassengers().size()));
       }
     }
+    
+    @Nested
+    @DisplayName("VIP 승객이 한명 있다.")
+    class VipPassenger {
+      @Test
+      @DisplayName("일반 항공편에 탑승되나 제거는 불가하다.")
+      public void testVipOnEconomy() {
+        assertAll("VIP 승객이 보통 항공편 이용에 관한 검증",
+            () -> assertEquals("1", economyFlight.getId()),
+            () -> assertEquals(true, economyFlight.addPassenger(jung)),
+            () -> assertEquals(1, economyFlight.getPassengers().size()),
+            () -> assertEquals("정성국",
+                economyFlight.getPassengers().get(0).getName()),
+            () -> assertEquals(false, economyFlight.removePassenger(jung)),
+            () -> assertEquals(1, economyFlight.getPassengers().size()));
+      }
+    }
   }
 
 }
